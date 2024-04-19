@@ -33,9 +33,9 @@ Game Over
 
 
 # Требования
-1. Скачать Visual Studio <br/>
+1. Скачать и установить Visual Studio <br/>
 https://visualstudio.microsoft.com/
-2. Скачать SFML <br/>
+2. Скачать и установить SFML <br/>
 https://www.sfml-dev.org/download.php
 
 # Настройка Visual Studio
