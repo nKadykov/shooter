@@ -1,11 +1,13 @@
-#include "Menu.h"
+#include "menu.h"
 
 Menu::Menu() {
+	buttonState = ButtonState::NONE;
 	menuTexture.loadFromFile("resources/back1.jpg");
 	menuSprite.setTexture(menuTexture);
 }
 
 Menu::Menu(std::string filename) {
+	buttonState = ButtonState::NONE;
 	menuTexture.loadFromFile(filename);
 	menuSprite.setTexture(menuTexture);
 }
@@ -39,15 +41,15 @@ void Menu::setState(MenuState state) {
 
 void Menu::draw(sf::RenderWindow& window) {
 	window.clear();
-	buttonState = none;
+	buttonState = NONE;
 	if ((sf::Mouse::getPosition(window).x < 700) && (sf::Mouse::getPosition(window).x > 500) && (sf::Mouse::getPosition(window).y > 200) && (sf::Mouse::getPosition(window).y < 300)) {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			buttonState = button1;
+			buttonState = ButtonState::START_GAME;
 		}
 	}
 	if ((sf::Mouse::getPosition(window).x < 700) && (sf::Mouse::getPosition(window).x > 500) && (sf::Mouse::getPosition(window).y > 400) && (sf::Mouse::getPosition(window).y < 500)) {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			buttonState = button2;
+			buttonState = ButtonState::CLOSE;
 		}
 	}
 	window.draw(menuSprite);

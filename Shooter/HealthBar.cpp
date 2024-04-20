@@ -1,4 +1,4 @@
-#include "HealthBar.h"
+#include "healthbar.h"
 
 HealthBar::HealthBar(int healthX, int healthY, sf::Sprite sprite) {
 	positionX = healthX;

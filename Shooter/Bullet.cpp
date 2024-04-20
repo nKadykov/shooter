@@ -1,4 +1,4 @@
-#include "Bullet.h"
+#include "bullet.h"
 
 Bullet::Bullet(int startX, int startY) {
 	bulletPosition.x = startX;

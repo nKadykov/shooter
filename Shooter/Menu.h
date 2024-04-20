@@ -3,8 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "Button.h"
 
-enum class MenuState { on, off };
-enum ButtonState { none, button1, button2 };
+enum class MenuState { ON, OFF };
+enum ButtonState { NONE, START_GAME, CLOSE };
 
 class Menu
 {
@@ -25,8 +25,8 @@ public:
 
 	ButtonState getButtonState();
 	MenuState getState();
-	void setButtonState(ButtonState state);
-	void setState(MenuState state);
+	void setButtonState(ButtonState);
+	void setState(MenuState);
 	void addButton(int, int, std::string);
 	void draw(sf::RenderWindow&);
 };

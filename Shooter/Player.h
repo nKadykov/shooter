@@ -29,6 +29,6 @@ public:
 	void stopUp();
 	void decreaseHealth();
 	bool ifAlive() const;
-	void drawPlayer(sf::RenderWindow&);
+	void draw(sf::RenderWindow&) const;
 	void update(sf::Time dt);
 };

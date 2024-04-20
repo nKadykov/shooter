@@ -1,12 +1,13 @@
-#include "Game.h"
+#include "game.h"
 #include <iostream>
 #include <list>
-#include "Bullet.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "HealthBar.h"
+#include "bullet.h"
+#include "player.h"
+#include "enemy.h"
+#include "healthbar.h"
 
 Game::Game() {
+    gameState = GameState::ON;
     if (!gameMusic.openFromFile("resources/music.mp3")) {
         exit(1);
     }
@@ -37,7 +38,7 @@ void Game::setState(GameState state) {
 
 void Game::draw(sf::RenderWindow& window) {
 
-    gameState = GameState::on;
+    gameState = GameState::ON;
 
     sf::Texture enemyTexture;
     if (!enemyTexture.loadFromFile("resources/enemy.png")) {
@@ -76,7 +77,7 @@ void Game::draw(sf::RenderWindow& window) {
 
     srand(time(NULL));
 
-    while (window.isOpen() && (gameState == GameState::on))
+    while (window.isOpen() && gameState == GameState::ON)
     {
         window.draw(backgroundSprite);
         dt = clock.getElapsedTime();
@@ -87,7 +88,7 @@ void Game::draw(sf::RenderWindow& window) {
         coutTime += t;
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
-            gameState = GameState::off;
+            gameState = GameState::OFF;
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
@@ -172,12 +173,12 @@ void Game::draw(sf::RenderWindow& window) {
         }
 
         if (!player.ifAlive()) {
-            gameState = GameState::lose;
+            gameState = GameState::LOSE;
         }
 
         player.update(dt);
         healthBar.draw(window);
-        player.drawPlayer(window);
+        player.draw(window);
         window.display();
     }
     bulletList.clear();

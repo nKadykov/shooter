@@ -1,6 +1,7 @@
-#include "Enemy.h"
+#include "enemy.h"
 
 Enemy::Enemy(int startX, int startY, sf::Sprite sprite) {
+	enemySpeed = 500.0f;
 	enemyPosition.x = startX;
 	enemyPosition.y = startY;
 
@@ -24,7 +25,7 @@ bool Enemy::ifHitted() const {
 	return enemyHitted;
 }
 
-void Enemy::draw(sf::RenderWindow& window) {
+void Enemy::draw(sf::RenderWindow& window) const {
 	window.draw(enemySprite);
 }
 

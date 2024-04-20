@@ -1,10 +1,10 @@
 #include <SFML/Graphics.hpp>
-#include "Game.h"
-#include "Menu.h"
-#include "GameOverWindow.h"
+#include "game.h"
+#include "menu.h"
+#include "gameoverwindow.h"
 #include <iostream>
 
-enum class State { gamestate, menustate, gameoverstate };
+enum class State { GAME, MENU, GAME_OVER };
 
 int main()
 {
@@ -23,10 +23,10 @@ int main()
     menu.addButton(500, 200, "resources/button2.png");
     menu.addButton(500, 400, "resources/button3.png");
 
-    State state = State::menustate;
-    ButtonState buttonState = ButtonState::none;
-    GameState gameState = GameState::on;
-    GameOverState gameOverState = GameOverState::off;
+    State state = State::MENU;
+    ButtonState buttonState = ButtonState::NONE;
+    GameState gameState = GameState::ON;
+    GameOverState gameOverState = GameOverState::OFF;
 
     while (window.isOpen()) {
         window.clear();
@@ -45,35 +45,35 @@ int main()
             window.close();
         }
 
-        if (gameState == GameState::off) {
-            state = State::menustate;
-            game.setState(GameState::on);
+        if (gameState == GameState::OFF) {
+            state = State::MENU;
+            game.setState(GameState::ON);
         }
-        else if (gameState == GameState::lose) {
-            state = State::gameoverstate;
-            game.setState(GameState::on);
+        else if (gameState == GameState::LOSE) {
+            state = State::GAME_OVER;
+            game.setState(GameState::ON);
         }
-        else if (gameOverState == GameOverState::off || buttonState == ButtonState::button1) {
-            state = State::gamestate;
-            gameOverWindow.setState(GameOverState::on);
-            menu.setButtonState(ButtonState::none);
+        else if (gameOverState == GameOverState::OFF || buttonState == ButtonState::START_GAME) {
+            state = State::GAME;
+            gameOverWindow.setState(GameOverState::ON);
+            menu.setButtonState(ButtonState::NONE);
         }
-        else if (gameOverState == GameOverState::menu) {
-            state = State::menustate;
-            gameOverWindow.setState(GameOverState::on);
+        else if (gameOverState == GameOverState::MENU) {
+            state = State::MENU;
+            gameOverWindow.setState(GameOverState::ON);
         }
-        if (buttonState == ButtonState::button2) {
+        if (buttonState == ButtonState::CLOSE) {
             window.close();
         }
 
         switch (state) {
-        case State::menustate:
+        case State::MENU:
             menu.draw(window);
             break;
-        case State::gamestate:
+        case State::GAME:
             game.draw(window);
             break;
-        case State::gameoverstate:
+        case State::GAME_OVER:
             gameOverWindow.draw(window);
             break;
         }

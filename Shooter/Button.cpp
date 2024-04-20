@@ -1,4 +1,4 @@
-#include "Button.h"
+#include "button.h"
 
 Button::Button(int buttonX, int buttonY, std::string filename) {
 	if (!buttonTexture.loadFromFile(filename)) {

@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-enum class GameState { on, off, lose };
+enum class GameState { ON, OFF, LOSE };
 
 class Game
 {
@@ -12,7 +12,7 @@ private:
 	sf::Texture backgroundTexture;
 	sf::Sprite backgroundSprite;
 	sf::Music gameMusic;
-	GameState gameState = GameState::on;
+	GameState gameState;
 
 public:
 	Game();
@@ -25,7 +25,7 @@ public:
 	void setMusic(const std::string&);
 	void setBackground(const std::string&);
 	GameState getState() const;
-	void setState(GameState state);
+	void setState(GameState);
 
 	void draw(sf::RenderWindow&);
 };

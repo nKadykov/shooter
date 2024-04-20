@@ -135,27 +135,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameOverWindow.cpp" />
-    <ClCompile Include="HealthBar.cpp" />
-    <ClCompile Include="HealthPoint.cpp" />
+    <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="button.cpp" />
+    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="gameoverwindow.cpp" />
+    <ClCompile Include="healthbar.cpp" />
+    <ClCompile Include="healthpoint.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameOverWindow.h" />
-    <ClInclude Include="HealthBar.h" />
-    <ClInclude Include="HealthPoint.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="bullet.h" />
+    <ClInclude Include="button.h" />
+    <ClInclude Include="enemy.h" />
+    <ClInclude Include="game.h" />
+    <ClInclude Include="gameoverwindow.h" />
+    <ClInclude Include="healthbar.h" />
+    <ClInclude Include="healthpoint.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

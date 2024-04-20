@@ -1,6 +1,7 @@
-#include "GameOverWindow.h"
+#include "gameoverwindow.h"
 
 GameOverWindow::GameOverWindow() {
+	gameOverState = GameOverState::ON;
 	gameOverTexture.loadFromFile("resources/GameOver.jpg");
 	gameOverSprite.setTexture(gameOverTexture);
 	backgroundTexture.loadFromFile("resources/back1.jpg");
@@ -23,15 +24,15 @@ void GameOverWindow::setState(GameOverState state) {
 }
 
 void GameOverWindow::draw(sf::RenderWindow& window) {
-	gameOverState = GameOverState::on;
+	gameOverState = GameOverState::ON;
 	window.clear();
 	if ((sf::Mouse::getPosition(window).x < 900) && (sf::Mouse::getPosition(window).x > 400) && (sf::Mouse::getPosition(window).y > 400) && (sf::Mouse::getPosition(window).y < 500)) {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			gameOverState = GameOverState::off;
+			gameOverState = GameOverState::OFF;
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
-		gameOverState = GameOverState::menu;
+		gameOverState = GameOverState::MENU;
 	}
 	window.draw(backgroundSprite);
 	window.draw(gameOverSprite);

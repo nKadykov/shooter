@@ -1,4 +1,4 @@
-#include "HealthPoint.h"
+#include "healthpoint.h"
 
 HealthPoint::HealthPoint(int healthPointX, int healthPointY, sf::Sprite sprite) {
 	healthPointPosition.x = healthPointX;

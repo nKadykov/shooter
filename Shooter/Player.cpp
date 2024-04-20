@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "player.h"
 
 Player::Player(float startX, float startY, sf::Sprite sprite) {
 	playerPosition.x = startX;
@@ -49,7 +49,7 @@ bool Player::ifAlive() const {
 	}
 }
 
-void Player::drawPlayer(sf::RenderWindow& window) {
+void Player::draw(sf::RenderWindow& window) const {
 	window.draw(playerSprite);
 }
 

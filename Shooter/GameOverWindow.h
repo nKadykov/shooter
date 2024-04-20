@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-enum class GameOverState { on, off, menu };
+enum class GameOverState { ON, OFF, MENU };
 
 class GameOverWindow
 {
@@ -12,7 +12,7 @@ private:
 	sf::Sprite backgroundSprite;
 	sf::Texture buttonTexture;
 	sf::Sprite buttonSprite;
-	GameOverState gameOverState = GameOverState::on;
+	GameOverState gameOverState;
 public:
 	GameOverWindow();
 	GameOverWindow(const GameOverWindow&) = delete;

@@ -18,4 +18,3 @@ public:
 	void setButtonPosition(int, int);
 	void draw(sf::RenderWindow&);
 };
-

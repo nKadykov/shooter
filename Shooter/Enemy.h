@@ -6,7 +6,7 @@ class Enemy
 private:
 	sf::Vector2f enemyPosition;
 	sf::Sprite enemySprite;
-	float enemySpeed = 500.0f;
+	float enemySpeed;
 	bool enemyHitted = false;
 public:
 	Enemy() = delete;
@@ -22,6 +22,6 @@ public:
 	void getHit();
 	bool ifHitted() const;
 
-	void draw(sf::RenderWindow&);
+	void draw(sf::RenderWindow&) const;
 	void update(sf::Time);
 };

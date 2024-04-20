@@ -14,14 +14,14 @@ class HealthBar
 
 public:
 	HealthBar() = delete;
-	HealthBar(int healthX, int healthY, sf::Sprite);
+	HealthBar(int, int, sf::Sprite);
 	HealthBar(const HealthBar&) = delete;
 	HealthBar(HealthBar&&) = delete;
 	HealthBar& operator=(const HealthBar&) = delete;
 	HealthBar& operator=(HealthBar&&) = delete;
 	~HealthBar() = default;
 
-	void setHealth(int playerHealth);
+	void setHealth(int);
 	void decreaseHealth();
 	void draw(sf::RenderWindow&);
 };
