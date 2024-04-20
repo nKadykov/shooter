@@ -66,7 +66,6 @@ int main()
             menu.setButtonState(ButtonState::NONE);
         }
         if (buttonState == ButtonState::CLOSE) {
-            delete pGame;
             window.close();
         }
 
@@ -83,6 +82,5 @@ int main()
         }
         window.display();
     }
-    delete pGame;
     return 0;
 }
