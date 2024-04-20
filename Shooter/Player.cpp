@@ -1,14 +1,14 @@
 #include "Player.h"
 
-Player::Player(float startX, float startY) {
+Player::Player(float startX, float startY, sf::Sprite sprite) {
 	playerPosition.x = startX;
 	playerPosition.y = startY;
 
 	if (!playerTexture.loadFromFile("resources/player1.png")) {
 		exit(1);
 	}
-	playerSprite.setTexture(playerTexture);
-	playerSprite.setPosition(playerPosition);
+
+	playerSprite = sprite;
 }
 
 

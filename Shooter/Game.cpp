@@ -40,18 +40,29 @@ void Game::draw(sf::RenderWindow& window) {
     gameState = GameState::on;
 
     sf::Texture enemyTexture;
-    enemyTexture.loadFromFile("resources/enemy.png");
+    if (!enemyTexture.loadFromFile("resources/enemy.png")) {
+        exit(1);
+    }
     sf::Sprite enemySprite;
     enemySprite.setTexture(enemyTexture);
 
     sf::Texture healthPointTexture;
-    healthPointTexture.loadFromFile("resources/heart.png");
+    if (!healthPointTexture.loadFromFile("resources/heart.png")) {
+        exit(1);
+    }
     sf::Sprite healthPointSprite;
     healthPointSprite.setTexture(healthPointTexture);
 
+    sf::Texture playerTexture;
+    if (!playerTexture.loadFromFile("resources/player1.png")) {
+        exit(1);
+    }
+    sf::Sprite playerSprite;
+    playerSprite.setTexture(playerTexture);
+
     gameMusic.play();
     backgroundSprite.setTexture(backgroundTexture);
-    Player player(10, 720 / 2);
+    Player player(10, 720 / 2, playerSprite);
     HealthBar healthBar(20, 20, healthPointSprite);
     healthBar.setHealth(player.getHealth());
     std::list<Bullet> bulletList;
