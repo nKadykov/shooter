@@ -15,9 +15,9 @@ int main()
     GameOverWindow gameOverWindow;
     gameOverWindow.setPosition(300, 200);
 
-    Game game;
-    game.setMusic("resources/back1.mp3");
-    game.setBackground("resources/back1.jpg");
+    Game *pGame = new Game();
+    pGame->setMusic("resources/back1.mp3");
+    pGame->setBackground("resources/back1.jpg");
 
     Menu menu;
     menu.addButton(500, 200, "resources/button2.png");
@@ -32,7 +32,7 @@ int main()
         window.clear();
 
         buttonState = menu.getButtonState();
-        gameState = game.getState();
+        gameState = pGame->getState();
         gameOverState = gameOverWindow.getState();
         sf::Event event;
 
@@ -45,24 +45,28 @@ int main()
             window.close();
         }
 
-        if (gameState == GameState::OFF) {
+        if (gameState == GameState::OFF || gameOverState == GameOverState::MENU) {
+            delete pGame;
+            gameOverWindow.setState(GameOverState::ON);
             state = State::MENU;
-            game.setState(GameState::ON);
+            pGame->setState(GameState::ON);
+            gameOverWindow.setState(GameOverState::ON);
         }
         else if (gameState == GameState::LOSE) {
+            delete pGame;
             state = State::GAME_OVER;
-            game.setState(GameState::ON);
+            pGame->setState(GameState::ON);
         }
         else if (gameOverState == GameOverState::OFF || buttonState == ButtonState::START_GAME) {
+            pGame = new Game();
+            pGame->setMusic("resources/back1.mp3");
+            pGame->setBackground("resources/back1.jpg");
             state = State::GAME;
             gameOverWindow.setState(GameOverState::ON);
             menu.setButtonState(ButtonState::NONE);
         }
-        else if (gameOverState == GameOverState::MENU) {
-            state = State::MENU;
-            gameOverWindow.setState(GameOverState::ON);
-        }
         if (buttonState == ButtonState::CLOSE) {
+            delete pGame;
             window.close();
         }
 
@@ -71,7 +75,7 @@ int main()
             menu.draw(window);
             break;
         case State::GAME:
-            game.draw(window);
+            pGame->draw(window);
             break;
         case State::GAME_OVER:
             gameOverWindow.draw(window);
@@ -79,5 +83,6 @@ int main()
         }
         window.display();
     }
+    delete pGame;
     return 0;
 }
