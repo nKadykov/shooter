@@ -13,7 +13,7 @@ sf::FloatRect Enemy::getPosition() {
 	return enemySprite.getGlobalBounds();
 }
 
-int Enemy::getX() {
+int Enemy::getX() const {
 	return enemyPosition.x;
 }
 

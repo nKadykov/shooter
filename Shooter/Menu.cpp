@@ -1,12 +1,14 @@
 #include "menu.h"
 
 Menu::Menu() {
+	menuState = MenuState::OFF;
 	buttonState = ButtonState::NONE;
 	menuTexture.loadFromFile("resources/back1.jpg");
 	menuSprite.setTexture(menuTexture);
 }
 
 Menu::Menu(std::string filename) {
+	menuState = MenuState::OFF;
 	buttonState = ButtonState::NONE;
 	menuTexture.loadFromFile(filename);
 	menuSprite.setTexture(menuTexture);
@@ -23,11 +25,11 @@ void Menu::addButton(int buttonX, int buttonY, std::string filename) {
 	buttonVector.push_back(newButton);
 }
 
-ButtonState Menu::getButtonState() {
+ButtonState Menu::getButtonState() const {
 	return buttonState;
 }
 
-MenuState Menu::getState() {
+MenuState Menu::getState() const {
 	return menuState;
 }
 

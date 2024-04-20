@@ -23,8 +23,8 @@ public:
 	Menu& operator=(Menu&&) = delete;
 	~Menu();
 
-	ButtonState getButtonState();
-	MenuState getState();
+	ButtonState getButtonState() const;
+	MenuState getState() const;
 	void setButtonState(ButtonState);
 	void setState(MenuState);
 	void addButton(int, int, std::string);
