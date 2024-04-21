@@ -1,35 +1,35 @@
 #include "enemy.h"
 
 Enemy::Enemy(int startX, int startY, sf::Sprite sprite) {
-	enemySpeed = 500.0f;
-	enemyPosition.x = startX;
-	enemyPosition.y = startY;
+	enemy_speed = 500.0f;
+	enemy_position.x = startX;
+	enemy_position.y = startY;
 
-	enemySprite = sprite;
-	enemySprite.setPosition(enemyPosition);
+	enemy_sprite = sprite;
+	enemy_sprite.setPosition(enemy_position);
 }
 
 sf::FloatRect Enemy::getPosition() {
-	return enemySprite.getGlobalBounds();
+	return enemy_sprite.getGlobalBounds();
 }
 
 int Enemy::getX() const {
-	return enemyPosition.x;
+	return enemy_position.x;
 }
 
 void Enemy::getHit() {
-	enemyHitted = true;
+	enemy_hit = true;
 }
 
 bool Enemy::ifHitted() const {
-	return enemyHitted;
+	return enemy_hit;
 }
 
 void Enemy::draw(sf::RenderWindow& window) const {
-	window.draw(enemySprite);
+	window.draw(enemy_sprite);
 }
 
 void Enemy::update(sf::Time dt) {
-	enemyPosition.x -= enemySpeed * dt.asSeconds();
-	enemySprite.setPosition(enemyPosition);
+	enemy_position.x -= enemy_speed * dt.asSeconds();
+	enemy_sprite.setPosition(enemy_position);
 }
