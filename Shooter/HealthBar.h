@@ -5,12 +5,12 @@
 
 class HealthBar
 {
-	int positionX;
-	int positionY;
-	sf::Sprite healthPointSprite;
-	std::vector<HealthPoint> healthBarVector;
+	int position_x;
+	int position_y;
+	sf::Sprite health_point_sprite;
+	std::vector<HealthPoint> health_bar_vector;
 	int health = 5;
-	bool isAlive = true;
+	bool is_alive = true;
 
 public:
 	HealthBar() = delete;

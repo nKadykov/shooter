@@ -10,8 +10,8 @@ GameOverWindow::GameOverWindow() {
 	button_sprite.setTexture(button_texture);
 }
 
-void GameOverWindow::setPosition(float positionX, float positionY) {
-	game_over_sprite.setPosition(positionX, positionY);
+void GameOverWindow::setPosition(float position_x, float position_y) {
+	game_over_sprite.setPosition(position_x, position_y);
 	button_sprite.setPosition(230, 300);
 }
 

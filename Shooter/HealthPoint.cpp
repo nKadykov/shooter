@@ -4,14 +4,14 @@ HealthPoint::HealthPoint(int healthPointX, int healthPointY, sf::Sprite sprite) 
 	healthPointPosition.x = healthPointX;
 	healthPointPosition.y = healthPointY;
 
-	healthPointSprite = sprite;
-	healthPointSprite.setPosition(healthPointPosition);
+	health_point_sprite = sprite;
+	health_point_sprite.setPosition(healthPointPosition);
 }
 
 sf::Sprite HealthPoint::getHealthPointSprite() {
-	return healthPointSprite;
+	return health_point_sprite;
 }
 
 sf::FloatRect HealthPoint::getHealthPointPosition() {
-	return healthPointSprite.getGlobalBounds();
+	return health_point_sprite.getGlobalBounds();
 }
