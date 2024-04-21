@@ -1,41 +1,41 @@
 #include "bullet.h"
 
 Bullet::Bullet(int startX, int startY) {
-	bulletPosition.x = startX;
-	bulletPosition.y = startY;
+	bullet_position.x = startX;
+	bullet_position.y = startY;
 
-	bulletShape.setRadius(5);
-	bulletShape.setFillColor(sf::Color::White);
-	bulletShape.setOutlineColor(sf::Color::Blue);
-	bulletShape.setOutlineThickness(2);
-	bulletShape.setPosition(bulletPosition);
+	bullet_shape.setRadius(5);
+	bullet_shape.setFillColor(sf::Color::White);
+	bullet_shape.setOutlineColor(sf::Color::Blue);
+	bullet_shape.setOutlineThickness(2);
+	bullet_shape.setPosition(bullet_position);
 }
 
 sf::CircleShape Bullet::getShape() {
-	return bulletShape;
+	return bullet_shape;
 }
 
 sf::FloatRect Bullet::getPosition() {
-	return bulletShape.getGlobalBounds();
+	return bullet_shape.getGlobalBounds();
 }
 
 int Bullet::getX() {
-	return bulletPosition.x;
+	return bullet_position.x;
 }
 
 void Bullet::makeHit() {
-	madeHit = true;
+	made_hit = true;
 }
 
 bool Bullet::ifMadeHit() const {
-	return (madeHit == true) ? true : false;
+	return (made_hit == true) ? true : false;
 }
 
 void Bullet::drawBullet(sf::RenderWindow& window) const {
-	window.draw(bulletShape);
+	window.draw(bullet_shape);
 }
 
 void Bullet::update(sf::Time dt) {
-	bulletPosition.x += bulletSpeed * dt.asSeconds();
-	bulletShape.setPosition(bulletPosition);
+	bullet_position.x += bullet_speed * dt.asSeconds();
+	bullet_shape.setPosition(bullet_position);
 }
