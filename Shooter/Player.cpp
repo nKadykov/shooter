@@ -1,47 +1,47 @@
 #include "player.h"
 
 Player::Player(float startX, float startY, sf::Sprite sprite) {
-	playerPosition.x = startX;
-	playerPosition.y = startY;
+	player_position.x = startX;
+	player_position.y = startY;
 
-	if (!playerTexture.loadFromFile("resources/player1.png")) {
+	if (!player_texture.loadFromFile("resources/player1.png")) {
 		exit(1);
 	}
 
-	playerSprite = sprite;
+	player_sprite = sprite;
 }
 
 
 sf::FloatRect Player::getPosition() {
-	return playerSprite.getGlobalBounds();
+	return player_sprite.getGlobalBounds();
 }
 
 int Player::getHealth() {
-	return playerHealth;
+	return player_health;
 }
 
 void Player::moveDown() {
-	playerMovingDown = true;
+	player_moving_down = true;
 }
 
 void Player::moveUp() {
-	playerMovingUp = true;
+	player_moving_up = true;
 }
 
 void Player::stopDown() {
-	playerMovingDown = false;
+	player_moving_down = false;
 }
 
 void Player::stopUp() {
-	playerMovingUp = false;
+	player_moving_up = false;
 }
 
 void Player::decreaseHealth() {
-	playerHealth--;
+	player_health--;
 }
 
 bool Player::ifAlive() const {
-	if (playerHealth > 0) {
+	if (player_health > 0) {
 		return true;
 	}
 	else {
@@ -50,21 +50,21 @@ bool Player::ifAlive() const {
 }
 
 void Player::draw(sf::RenderWindow& window) const {
-	window.draw(playerSprite);
+	window.draw(player_sprite);
 }
 
 void Player::update(sf::Time dt) {
-	if (playerMovingDown) {
-		playerPosition.y += playerSpeed * dt.asSeconds();
+	if (player_moving_down) {
+		player_position.y += player_speed * dt.asSeconds();
 	}
-	if (playerMovingUp) {
-		playerPosition.y -= playerSpeed * dt.asSeconds();
+	if (player_moving_up) {
+		player_position.y -= player_speed * dt.asSeconds();
 	}
-	if (playerPosition.y > 650) {
-		playerPosition.y = 650;
+	if (player_position.y > 650) {
+		player_position.y = 650;
 	}
-	if (playerPosition.y < 60) {
-		playerPosition.y = 60;
+	if (player_position.y < 60) {
+		player_position.y = 60;
 	}
-	playerSprite.setPosition(playerPosition);
+	player_sprite.setPosition(player_position);
 }

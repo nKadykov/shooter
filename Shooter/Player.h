@@ -4,14 +4,14 @@
 class Player
 {
 private:
-	sf::Vector2f playerPosition;
-	sf::Texture playerTexture;
-	sf::Sprite playerSprite;
-	float playerSpeed = 700.0f;
-	bool playerMovingDown = false;
-	bool playerMovingUp = false;
-	int playerHealth = 4;
-	bool isAlive = true;
+	sf::Vector2f player_position;
+	sf::Texture player_texture;
+	sf::Sprite player_sprite;
+	float player_speed = 700.0f;
+	bool player_moving_down = false;
+	bool player_moving_up = false;
+	int player_health = 4;
+	bool is_alive = true;
 
 public:
 	Player() = delete;
