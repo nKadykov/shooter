@@ -9,10 +9,10 @@ class Game
 private:
 	sf::Clock clock;
 	sf::Time dt;
-	sf::Texture backgroundTexture;
-	sf::Sprite backgroundSprite;
-	sf::Music gameMusic;
-	GameState gameState;
+	sf::Texture background_texture;
+	sf::Sprite background_sprite;
+	sf::Music game_music;
+	GameState game_state;
 
 public:
 	Game();

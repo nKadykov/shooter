@@ -7,38 +7,38 @@
 #include "healthbar.h"
 
 Game::Game() {
-    gameState = GameState::ON;
-    if (!gameMusic.openFromFile("resources/music.mp3")) {
+    game_state = GameState::ON;
+    if (!game_music.openFromFile("resources/music.mp3")) {
         exit(1);
     }
-    if (!backgroundTexture.loadFromFile("resources/background.jpg")) {
+    if (!background_texture.loadFromFile("resources/background.jpg")) {
         exit(1);
     }
 }
 
 void Game::setBackground(const std::string& filename) {
-    if (!backgroundTexture.loadFromFile(filename)) {
-        backgroundTexture.loadFromFile("resources/background.jpg");
+    if (!background_texture.loadFromFile(filename)) {
+        background_texture.loadFromFile("resources/background.jpg");
     }
 }
 
 void Game::setMusic(const std::string& filename) {
-    if (!gameMusic.openFromFile(filename)) {
-        gameMusic.openFromFile("resources/music.mp3");
+    if (!game_music.openFromFile(filename)) {
+        game_music.openFromFile("resources/music.mp3");
     }
 }
 
 GameState Game::getState() const {
-    return gameState;
+    return game_state;
 }
 
 void Game::setState(GameState state) {
-    gameState = state;
+    game_state = state;
 }
 
 void Game::draw(sf::RenderWindow& window) {
 
-    gameState = GameState::ON;
+    game_state = GameState::ON;
 
     sf::Texture enemyTexture;
     if (!enemyTexture.loadFromFile("resources/enemy.png")) {
@@ -61,8 +61,8 @@ void Game::draw(sf::RenderWindow& window) {
     sf::Sprite playerSprite;
     playerSprite.setTexture(playerTexture);
 
-    gameMusic.play();
-    backgroundSprite.setTexture(backgroundTexture);
+    game_music.play();
+    background_sprite.setTexture(background_texture);
     Player player(10, 720 / 2, playerSprite);
     HealthBar healthBar(20, 20, healthPointSprite);
     healthBar.setHealth(player.getHealth());
@@ -77,9 +77,9 @@ void Game::draw(sf::RenderWindow& window) {
 
     srand(time(NULL));
 
-    while (window.isOpen() && gameState == GameState::ON)
+    while (window.isOpen() && game_state == GameState::ON)
     {
-        window.draw(backgroundSprite);
+        window.draw(background_sprite);
         dt = clock.getElapsedTime();
         clock.restart();
         float t = dt.asSeconds();
@@ -88,7 +88,7 @@ void Game::draw(sf::RenderWindow& window) {
         coutTime += t;
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
-            gameState = GameState::OFF;
+            game_state = GameState::OFF;
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
@@ -173,7 +173,7 @@ void Game::draw(sf::RenderWindow& window) {
         }
 
         if (!player.ifAlive()) {
-            gameState = GameState::LOSE;
+            game_state = GameState::LOSE;
         }
 
         player.update(dt);
