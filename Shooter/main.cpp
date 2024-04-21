@@ -32,7 +32,10 @@ int main()
         window.clear();
 
         buttonState = menu.getButtonState();
-        gameState = pGame->getState();
+        
+        if (pGame) {
+            gameState = pGame->getState();
+        }
         gameOverState = gameOverWindow.getState();
         sf::Event event;
 
@@ -46,18 +49,23 @@ int main()
         }
 
         if (gameState == GameState::OFF || gameOverState == GameOverState::MENU) {
-            delete pGame;
+            if (pGame) {
+                delete pGame;
+                pGame = NULL;
+            }
             gameOverWindow.setState(GameOverState::ON);
             state = State::MENU;
-            pGame->setState(GameState::ON);
             gameOverWindow.setState(GameOverState::ON);
         }
-        else if (gameState == GameState::LOSE) {
-            delete pGame;
+        if (gameState == GameState::LOSE) {
+            if (pGame) {
+                delete pGame;
+                pGame = nullptr;
+            }
             state = State::GAME_OVER;
-            pGame->setState(GameState::ON);
+            gameState = GameState::ON;
         }
-        else if (gameOverState == GameOverState::OFF || buttonState == ButtonState::START_GAME) {
+        if (gameOverState == GameOverState::OFF || buttonState == ButtonState::START_GAME) {
             pGame = new Game();
             pGame->setMusic("resources/back1.mp3");
             pGame->setBackground("resources/back1.jpg");
@@ -81,6 +89,10 @@ int main()
             break;
         }
         window.display();
+    }
+    if (pGame) {
+        delete pGame;
+        pGame = NULL;
     }
     return 0;
 }
