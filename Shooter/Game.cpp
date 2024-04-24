@@ -75,7 +75,7 @@ void Game::draw(sf::RenderWindow& window) {
     float bulletTime = 0;
     float coutTime = 0;
 
-    srand(time(NULL));
+    srand(time(nullptr));
 
     while (window.isOpen() && game_state == GameState::ON)
     {

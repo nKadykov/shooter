@@ -51,7 +51,7 @@ int main()
         if (game_state == GameState::OFF || game_over_state == GameOverState::MENU) {
             if (pGame) {
                 delete pGame;
-                pGame = NULL;
+                pGame = nullptr;
             }
             game_over_window.setState(GameOverState::ON);
             state = State::MENU;
@@ -92,7 +92,7 @@ int main()
     }
     if (pGame) {
         delete pGame;
-        pGame = NULL;
+        pGame = nullptr;
     }
     return 0;
 }
