@@ -18,6 +18,29 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\bullet.cpp" />
+    <ClCompile Include="src\button.cpp" />
+    <ClCompile Include="src\enemy.cpp" />
+    <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\gameoverwindow.cpp" />
+    <ClCompile Include="src\healthbar.cpp" />
+    <ClCompile Include="src\healthpoint.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\menu.cpp" />
+    <ClCompile Include="src\player.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\bullet.h" />
+    <ClInclude Include="src\button.h" />
+    <ClInclude Include="src\enemy.h" />
+    <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\gameoverwindow.h" />
+    <ClInclude Include="src\healthbar.h" />
+    <ClInclude Include="src\healthpoint.h" />
+    <ClInclude Include="src\menu.h" />
+    <ClInclude Include="src\player.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -134,29 +157,6 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="bullet.cpp" />
-    <ClCompile Include="button.cpp" />
-    <ClCompile Include="enemy.cpp" />
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="gameoverwindow.cpp" />
-    <ClCompile Include="healthbar.cpp" />
-    <ClCompile Include="healthpoint.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="menu.cpp" />
-    <ClCompile Include="player.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="bullet.h" />
-    <ClInclude Include="button.h" />
-    <ClInclude Include="enemy.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="gameoverwindow.h" />
-    <ClInclude Include="healthbar.h" />
-    <ClInclude Include="healthpoint.h" />
-    <ClInclude Include="menu.h" />
-    <ClInclude Include="player.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
