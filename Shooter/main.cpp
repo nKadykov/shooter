@@ -53,7 +53,6 @@ int main()
                 delete pGame;
                 pGame = nullptr;
             }
-            game_over_window.setState(GameOverState::ON);
             state = State::MENU;
             game_over_window.setState(GameOverState::ON);
         }
