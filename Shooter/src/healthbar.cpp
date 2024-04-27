@@ -1,37 +1,37 @@
 #include "healthbar.h"
 
 HealthBar::HealthBar(int healthX, int healthY, sf::Sprite sprite) {
-	position_x = healthX;
-	position_y = healthY;
-	health_point_sprite = sprite;
-	for (int i = 0; i < health; i++) {
+	m_position_x = healthX;
+	m_position_y = healthY;
+	m_health_point_sprite = sprite;
+	for (int i = 0; i < m_health; i++) {
 		HealthPoint newHealthPoint(healthX, healthY, sprite);
-		health_bar_vector.push_back(newHealthPoint);
+		m_health_bar_vector.push_back(newHealthPoint);
 		healthX += 40;
 	}
 }
 
 void HealthBar::decreaseHealth() {
-	health--;
-	if (health > 0) {
-		health_bar_vector.pop_back();
+	m_health--;
+	if (m_health > 0) {
+		m_health_bar_vector.pop_back();
 	}
 }
 
 void HealthBar::setHealth(int playerHealth) {
-	health = playerHealth;
-	health_bar_vector.clear();
-	int healthX = position_x;
-	int healthY = position_y;
-	for (int i = 0; i < health; i++) {
-		HealthPoint newHealthPoint(healthX, healthY, health_point_sprite);
-		health_bar_vector.push_back(newHealthPoint);
+	m_health = playerHealth;
+	m_health_bar_vector.clear();
+	int healthX = m_position_x;
+	int healthY = m_position_y;
+	for (int i = 0; i < m_health; i++) {
+		HealthPoint newHealthPoint(healthX, healthY, m_health_point_sprite);
+		m_health_bar_vector.push_back(newHealthPoint);
 		healthX += 40;
 	}
 }
 
 void HealthBar::draw(sf::RenderWindow& window) {
-	for (int i = 0; i < health; i++) {
-		window.draw(health_bar_vector[i].getHealthPointSprite());
+	for (int i = 0; i < m_health; i++) {
+		window.draw(m_health_bar_vector[i].getHealthPointSprite());
 	}
 }

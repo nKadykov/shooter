@@ -4,9 +4,9 @@
 class HealthPoint
 {
 private:
-	sf::CircleShape healthPointShape;
-	sf::Vector2f healthPointPosition;
-	sf::Sprite health_point_sprite;
+	sf::CircleShape m_health_point_shape;
+	sf::Vector2f m_health_point_position;
+	sf::Sprite m_health_point_sprite;
 public:
 	HealthPoint() = delete;
 	HealthPoint(int healthPointX, int healthPointY, sf::Sprite);

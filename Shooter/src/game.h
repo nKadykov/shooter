@@ -7,12 +7,12 @@ enum class GameState { ON, OFF, LOSE };
 class Game
 {
 private:
-	sf::Clock clock;
-	sf::Time dt;
-	sf::Texture background_texture;
-	sf::Sprite background_sprite;
-	sf::Music game_music;
-	GameState game_state;
+	sf::Clock m_clock;
+	sf::Time m_dt;
+	sf::Texture m_background_texture;
+	sf::Sprite m_background_sprite;
+	sf::Music m_game_music;
+	GameState m_game_state;
 
 public:
 	Game();

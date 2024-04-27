@@ -4,10 +4,10 @@
 class Bullet
 {
 private:
-	sf::CircleShape bullet_shape;
-	sf::Vector2f bullet_position;
-	float bullet_speed = 1000.0f;
-	bool made_hit = false;
+	sf::CircleShape m_bullet_shape;
+	sf::Vector2f m_bullet_position;
+	float m_bullet_speed = 1000.0f;
+	bool m_made_hit = false;
 public:
 	Bullet() = delete;
 	Bullet(int startX, int startY);
@@ -25,5 +25,5 @@ public:
 	bool ifMadeHit() const;
 
 	void drawBullet(sf::RenderWindow&) const;
-	void update(sf::Time dt);
+	void update(sf::Time m_dt);
 };

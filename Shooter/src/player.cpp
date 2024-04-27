@@ -1,47 +1,47 @@
 #include "player.h"
 
 Player::Player(float startX, float startY, sf::Sprite sprite) {
-	player_position.x = startX;
-	player_position.y = startY;
+	m_player_position.x = startX;
+	m_player_position.y = startY;
 
-	if (!player_texture.loadFromFile("resources/player1.png")) {
+	if (!m_player_texture.loadFromFile("resources/player1.png")) {
 		exit(1);
 	}
 
-	player_sprite = sprite;
+	m_player_sprite = sprite;
 }
 
 
 sf::FloatRect Player::getPosition() {
-	return player_sprite.getGlobalBounds();
+	return m_player_sprite.getGlobalBounds();
 }
 
 int Player::getHealth() {
-	return player_health;
+	return m_player_health;
 }
 
 void Player::moveDown() {
-	player_moving_down = true;
+	m_player_moving_down = true;
 }
 
 void Player::moveUp() {
-	player_moving_up = true;
+	m_player_moving_up = true;
 }
 
 void Player::stopDown() {
-	player_moving_down = false;
+	m_player_moving_down = false;
 }
 
 void Player::stopUp() {
-	player_moving_up = false;
+	m_player_moving_up = false;
 }
 
 void Player::decreaseHealth() {
-	player_health--;
+	m_player_health--;
 }
 
 bool Player::ifAlive() const {
-	if (player_health > 0) {
+	if (m_player_health > 0) {
 		return true;
 	}
 	else {
@@ -50,21 +50,21 @@ bool Player::ifAlive() const {
 }
 
 void Player::draw(sf::RenderWindow& window) const {
-	window.draw(player_sprite);
+	window.draw(m_player_sprite);
 }
 
 void Player::update(sf::Time dt) {
-	if (player_moving_down) {
-		player_position.y += player_speed * dt.asSeconds();
+	if (m_player_moving_down) {
+		m_player_position.y += m_player_speed * dt.asSeconds();
 	}
-	if (player_moving_up) {
-		player_position.y -= player_speed * dt.asSeconds();
+	if (m_player_moving_up) {
+		m_player_position.y -= m_player_speed * dt.asSeconds();
 	}
-	if (player_position.y > 650) {
-		player_position.y = 650;
+	if (m_player_position.y > 650) {
+		m_player_position.y = 650;
 	}
-	if (player_position.y < 60) {
-		player_position.y = 60;
+	if (m_player_position.y < 60) {
+		m_player_position.y = 60;
 	}
-	player_sprite.setPosition(player_position);
+	m_player_sprite.setPosition(m_player_position);
 }

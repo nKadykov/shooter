@@ -4,10 +4,10 @@
 class Enemy
 {
 private:
-	sf::Vector2f enemy_position;
-	sf::Sprite enemy_sprite;
-	float enemy_speed;
-	bool enemy_hit = false;
+	sf::Vector2f m_enemy_position;
+	sf::Sprite m_enemy_sprite;
+	float m_enemy_speed;
+	bool m_enemy_hit = false;
 public:
 	Enemy() = delete;
 	Enemy(int startX, int startY, sf::Sprite);

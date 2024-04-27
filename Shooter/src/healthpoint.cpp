@@ -1,17 +1,17 @@
 #include "healthpoint.h"
 
 HealthPoint::HealthPoint(int healthPointX, int healthPointY, sf::Sprite sprite) {
-	healthPointPosition.x = healthPointX;
-	healthPointPosition.y = healthPointY;
+	m_health_point_position.x = healthPointX;
+	m_health_point_position.y = healthPointY;
 
-	health_point_sprite = sprite;
-	health_point_sprite.setPosition(healthPointPosition);
+	m_health_point_sprite = sprite;
+	m_health_point_sprite.setPosition(m_health_point_position);
 }
 
 sf::Sprite HealthPoint::getHealthPointSprite() {
-	return health_point_sprite;
+	return m_health_point_sprite;
 }
 
 sf::FloatRect HealthPoint::getHealthPointPosition() {
-	return health_point_sprite.getGlobalBounds();
+	return m_health_point_sprite.getGlobalBounds();
 }

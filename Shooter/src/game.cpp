@@ -7,38 +7,38 @@
 #include "healthbar.h"
 
 Game::Game() {
-    game_state = GameState::ON;
-    if (!game_music.openFromFile("resources/music.mp3")) {
+    m_game_state = GameState::ON;
+    if (!m_game_music.openFromFile("resources/music.mp3")) {
         exit(1);
     }
-    if (!background_texture.loadFromFile("resources/background.jpg")) {
+    if (!m_background_texture.loadFromFile("resources/background.jpg")) {
         exit(1);
     }
 }
 
 void Game::setBackground(const std::string& filename) {
-    if (!background_texture.loadFromFile(filename)) {
-        background_texture.loadFromFile("resources/background.jpg");
+    if (!m_background_texture.loadFromFile(filename)) {
+        m_background_texture.loadFromFile("resources/background.jpg");
     }
 }
 
 void Game::setMusic(const std::string& filename) {
-    if (!game_music.openFromFile(filename)) {
-        game_music.openFromFile("resources/music.mp3");
+    if (!m_game_music.openFromFile(filename)) {
+        m_game_music.openFromFile("resources/music.mp3");
     }
 }
 
 GameState Game::getState() const {
-    return game_state;
+    return m_game_state;
 }
 
 void Game::setState(GameState state) {
-    game_state = state;
+    m_game_state = state;
 }
 
 void Game::draw(sf::RenderWindow& window) {
 
-    game_state = GameState::ON;
+    m_game_state = GameState::ON;
 
     sf::Texture enemyTexture;
     if (!enemyTexture.loadFromFile("resources/enemy.png")) {
@@ -61,11 +61,11 @@ void Game::draw(sf::RenderWindow& window) {
     sf::Sprite playerSprite;
     playerSprite.setTexture(playerTexture);
 
-    game_music.play();
-    background_sprite.setTexture(background_texture);
+    m_game_music.play();
+    m_background_sprite.setTexture(m_background_texture);
     Player player(10, 720 / 2, playerSprite);
-    HealthBar healthBar(20, 20, health_point_sprite);
-    healthBar.setHealth(player.getHealth());
+    HealthBar m_healthBar(20, 20, health_point_sprite);
+    m_healthBar.setHealth(player.getHealth());
     std::list<Bullet> bulletList;
     std::list<Enemy> enemyList;
 
@@ -77,18 +77,18 @@ void Game::draw(sf::RenderWindow& window) {
 
     srand(time(nullptr));
 
-    while (window.isOpen() && game_state == GameState::ON)
+    while (window.isOpen() && m_game_state == GameState::ON)
     {
-        window.draw(background_sprite);
-        dt = clock.getElapsedTime();
-        clock.restart();
-        float t = dt.asSeconds();
+        window.draw(m_background_sprite);
+        m_dt = m_clock.getElapsedTime();
+        m_clock.restart();
+        float t = m_dt.asSeconds();
         enemyTime += t;
         bulletTime += t;
         coutTime += t;
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
-            game_state = GameState::OFF;
+            m_game_state = GameState::OFF;
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
@@ -144,7 +144,7 @@ void Game::draw(sf::RenderWindow& window) {
         while (itEnemy != enemyList.end()) {
             if (itEnemy->getX() < 0) {
                 player.decreaseHealth();
-                healthBar.decreaseHealth();
+                m_healthBar.decreaseHealth();
             }
             if (itEnemy->getX() < 0 || itEnemy->ifHitted()) {
                 itEnemy = enemyList.erase(itEnemy);
@@ -164,20 +164,20 @@ void Game::draw(sf::RenderWindow& window) {
 
         for (auto it = enemyList.begin(); it != enemyList.end(); it++) {
             it->draw(window);
-            it->update(dt);
+            it->update(m_dt);
         }
 
         for (auto it = bulletList.begin(); it != bulletList.end(); it++) {
             it->drawBullet(window);
-            it->update(dt);
+            it->update(m_dt);
         }
 
         if (!player.ifAlive()) {
-            game_state = GameState::LOSE;
+            m_game_state = GameState::LOSE;
         }
 
-        player.update(dt);
-        healthBar.draw(window);
+        player.update(m_dt);
+        m_healthBar.draw(window);
         player.draw(window);
         window.display();
     }
