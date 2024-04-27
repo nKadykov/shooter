@@ -40,36 +40,36 @@ void Game::draw(sf::RenderWindow& window) {
 
     m_game_state = GameState::ON;
 
-    sf::Texture enemyTexture;
-    if (!enemyTexture.loadFromFile("resources/enemy.png")) {
+    sf::Texture enemy_texture;
+    if (!enemy_texture.loadFromFile("resources/enemy.png")) {
         exit(1);
     }
-    sf::Sprite enemySprite;
-    enemySprite.setTexture(enemyTexture);
+    sf::Sprite enemy_sprite;
+    enemy_sprite.setTexture(enemy_texture);
 
-    sf::Texture healthPointTexture;
-    if (!healthPointTexture.loadFromFile("resources/heart.png")) {
+    sf::Texture health_point_texture;
+    if (!health_point_texture.loadFromFile("resources/heart.png")) {
         exit(1);
     }
     sf::Sprite health_point_sprite;
-    health_point_sprite.setTexture(healthPointTexture);
+    health_point_sprite.setTexture(health_point_texture);
 
-    sf::Texture playerTexture;
-    if (!playerTexture.loadFromFile("resources/player1.png")) {
+    sf::Texture player_texture;
+    if (!player_texture.loadFromFile("resources/player1.png")) {
         exit(1);
     }
-    sf::Sprite playerSprite;
-    playerSprite.setTexture(playerTexture);
+    sf::Sprite player_sprite;
+    player_sprite.setTexture(player_texture);
 
     m_game_music.play();
     m_background_sprite.setTexture(m_background_texture);
-    Player player(10, 720 / 2, playerSprite);
+    Player player(10, 720 / 2, player_sprite);
     HealthBar m_healthBar(20, 20, health_point_sprite);
     m_healthBar.setHealth(player.getHealth());
-    std::list<Bullet> bulletList;
-    std::list<Enemy> enemyList;
+    std::list<Bullet> bullet_list;
+    std::list<Enemy> enemy_list;
 
-    bool isFiring = false;
+    bool is_firing = false;
 
     float enemyTime = 0;
     float bulletTime = 0;
@@ -111,27 +111,27 @@ void Game::draw(sf::RenderWindow& window) {
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
             if (bulletTime > 0.1) {
-                isFiring = true;
+                is_firing = true;
             }
             bulletTime = 0;
         }
 
-        if (isFiring == true) {
+        if (is_firing == true) {
             Bullet newBullet(player.getPosition().left + 50, player.getPosition().top + 35);
-            bulletList.push_back(newBullet);
-            isFiring = false;
+            bullet_list.push_back(newBullet);
+            is_firing = false;
         }
 
         int enemyY = rand() % 600;
 
         if (enemyTime > 1) {
-            Enemy newEnemy(1280 - 15, 50 + enemyY, enemySprite);
-            enemyList.push_back(newEnemy);
+            Enemy newEnemy(1280 - 15, 50 + enemyY, enemy_sprite);
+            enemy_list.push_back(newEnemy);
             enemyTime = 0;
         }
 
-        for (auto itBullet = bulletList.begin(); itBullet != bulletList.end(); itBullet++) {
-            for (auto itEnemy = enemyList.begin(); itEnemy != enemyList.end(); itEnemy++) {
+        for (auto itBullet = bullet_list.begin(); itBullet != bullet_list.end(); itBullet++) {
+            for (auto itEnemy = enemy_list.begin(); itEnemy != enemy_list.end(); itEnemy++) {
                 if (itBullet->getPosition().intersects(itEnemy->getPosition())) {
                     itBullet->makeHit();
                     itEnemy->getHit();
@@ -140,34 +140,34 @@ void Game::draw(sf::RenderWindow& window) {
             }
         }
 
-        auto itEnemy = enemyList.begin();
-        while (itEnemy != enemyList.end()) {
+        auto itEnemy = enemy_list.begin();
+        while (itEnemy != enemy_list.end()) {
             if (itEnemy->getX() < 0) {
                 player.decreaseHealth();
                 m_healthBar.decreaseHealth();
             }
             if (itEnemy->getX() < 0 || itEnemy->ifHitted()) {
-                itEnemy = enemyList.erase(itEnemy);
+                itEnemy = enemy_list.erase(itEnemy);
                 continue;
             }
             itEnemy++;
         }
 
-        auto itBullet = bulletList.begin();
-        while (itBullet != bulletList.end()) {
+        auto itBullet = bullet_list.begin();
+        while (itBullet != bullet_list.end()) {
             if (itBullet->getX() > 1280 || itBullet->ifMadeHit()) {
-                itBullet = bulletList.erase(itBullet);
+                itBullet = bullet_list.erase(itBullet);
                 continue;
             }
             itBullet++;
         }
 
-        for (auto it = enemyList.begin(); it != enemyList.end(); it++) {
+        for (auto it = enemy_list.begin(); it != enemy_list.end(); it++) {
             it->draw(window);
             it->update(m_dt);
         }
 
-        for (auto it = bulletList.begin(); it != bulletList.end(); it++) {
+        for (auto it = bullet_list.begin(); it != bullet_list.end(); it++) {
             it->drawBullet(window);
             it->update(m_dt);
         }
@@ -181,6 +181,6 @@ void Game::draw(sf::RenderWindow& window) {
         player.draw(window);
         window.display();
     }
-    bulletList.clear();
-    enemyList.clear();
+    bullet_list.clear();
+    enemy_list.clear();
 }
