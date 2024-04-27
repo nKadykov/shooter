@@ -71,9 +71,8 @@ void Game::draw(sf::RenderWindow& window) {
 
     bool is_firing = false;
 
-    float enemyTime = 0;
-    float bulletTime = 0;
-    float coutTime = 0;
+    float enemy_time = 0;
+    float bullet_time = 0;
 
     srand(time(nullptr));
 
@@ -83,9 +82,8 @@ void Game::draw(sf::RenderWindow& window) {
         m_dt = m_clock.getElapsedTime();
         m_clock.restart();
         float t = m_dt.asSeconds();
-        enemyTime += t;
-        bulletTime += t;
-        coutTime += t;
+        enemy_time += t;
+        bullet_time += t;
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
             m_game_state = GameState::OFF;
@@ -110,56 +108,56 @@ void Game::draw(sf::RenderWindow& window) {
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            if (bulletTime > 0.1) {
+            if (bullet_time > 0.1) {
                 is_firing = true;
             }
-            bulletTime = 0;
+            bullet_time = 0;
         }
 
         if (is_firing == true) {
-            Bullet newBullet(player.getPosition().left + 50, player.getPosition().top + 35);
-            bullet_list.push_back(newBullet);
+            Bullet new_bullet(player.getPosition().left + 50, player.getPosition().top + 35);
+            bullet_list.push_back(new_bullet);
             is_firing = false;
         }
 
-        int enemyY = rand() % 600;
+        int enemy_y = rand() % 600;
 
-        if (enemyTime > 1) {
-            Enemy newEnemy(1280 - 15, 50 + enemyY, enemy_sprite);
-            enemy_list.push_back(newEnemy);
-            enemyTime = 0;
+        if (enemy_time > 1) {
+            Enemy new_enemy(1280 - 15, 50 + enemy_y, enemy_sprite);
+            enemy_list.push_back(new_enemy);
+            enemy_time = 0;
         }
 
-        for (auto itBullet = bullet_list.begin(); itBullet != bullet_list.end(); itBullet++) {
-            for (auto itEnemy = enemy_list.begin(); itEnemy != enemy_list.end(); itEnemy++) {
-                if (itBullet->getPosition().intersects(itEnemy->getPosition())) {
-                    itBullet->makeHit();
-                    itEnemy->getHit();
+        for (auto it_bullet = bullet_list.begin(); it_bullet != bullet_list.end(); it_bullet++) {
+            for (auto it_enemy = enemy_list.begin(); it_enemy != enemy_list.end(); it_enemy++) {
+                if (it_bullet->getPosition().intersects(it_enemy->getPosition())) {
+                    it_bullet->makeHit();
+                    it_enemy->getHit();
                     continue;
                 }
             }
         }
 
-        auto itEnemy = enemy_list.begin();
-        while (itEnemy != enemy_list.end()) {
-            if (itEnemy->getX() < 0) {
+        auto it_enemy = enemy_list.begin();
+        while (it_enemy != enemy_list.end()) {
+            if (it_enemy->getX() < 0) {
                 player.decreaseHealth();
                 m_healthBar.decreaseHealth();
             }
-            if (itEnemy->getX() < 0 || itEnemy->ifHitted()) {
-                itEnemy = enemy_list.erase(itEnemy);
+            if (it_enemy->getX() < 0 || it_enemy->ifHitted()) {
+                it_enemy = enemy_list.erase(it_enemy);
                 continue;
             }
-            itEnemy++;
+            it_enemy++;
         }
 
-        auto itBullet = bullet_list.begin();
-        while (itBullet != bullet_list.end()) {
-            if (itBullet->getX() > 1280 || itBullet->ifMadeHit()) {
-                itBullet = bullet_list.erase(itBullet);
+        auto it_bullet = bullet_list.begin();
+        while (it_bullet != bullet_list.end()) {
+            if (it_bullet->getX() > 1280 || it_bullet->ifMadeHit()) {
+                it_bullet = bullet_list.erase(it_bullet);
                 continue;
             }
-            itBullet++;
+            it_bullet++;
         }
 
         for (auto it = enemy_list.begin(); it != enemy_list.end(); it++) {
