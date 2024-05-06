@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include "Button.h"
+#include "button.h"
 
 enum class MenuState { ON, OFF };
 enum ButtonState { NONE, START_GAME, CLOSE };
@@ -27,6 +27,6 @@ public:
 	MenuState getState() const;
 	void setButtonState(ButtonState);
 	void setState(MenuState);
-	void addButton(int, int, std::string);
+	void addButton(int, int, sf::Texture);
 	void draw(sf::RenderWindow&);
 };

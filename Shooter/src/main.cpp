@@ -20,8 +20,12 @@ int main()
     pGame->setBackground("resources/back1.jpg");
 
     Menu menu;
-    menu.addButton(500, 200, "resources/button2.png");
-    menu.addButton(500, 400, "resources/button3.png");
+    sf::Texture button_texture_1;
+    sf::Texture button_texture_2;
+    button_texture_1.loadFromFile("resources/button2.png");
+    button_texture_2.loadFromFile("resources/button3.png");
+    menu.addButton(500, 200, button_texture_1);
+    menu.addButton(500, 400, button_texture_2);
 
     State state = State::MENU;
     ButtonState button_state = ButtonState::NONE;
