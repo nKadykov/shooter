@@ -3,7 +3,7 @@
 Menu::Menu() {
 	m_menu_state = MenuState::ON;
 	m_button_state = ButtonState::NONE;
-	m_menu_texture.loadFromFile("resources/back1.jpg");
+	m_menu_texture.loadFromFile("images/back1.jpg");
 	m_menu_sprite.setTexture(m_menu_texture);
 }
 

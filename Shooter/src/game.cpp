@@ -8,23 +8,23 @@
 
 Game::Game() {
     m_game_state = GameState::ON;
-    if (!m_game_music.openFromFile("resources/music.mp3")) {
+    if (!m_game_music.openFromFile("music/music.mp3")) {
         exit(1);
     }
-    if (!m_background_texture.loadFromFile("resources/background.jpg")) {
+    if (!m_background_texture.loadFromFile("images/background.jpg")) {
         exit(1);
     }
 }
 
 void Game::setBackground(const std::string& filename) {
     if (!m_background_texture.loadFromFile(filename)) {
-        m_background_texture.loadFromFile("resources/background.jpg");
+        m_background_texture.loadFromFile("images/background.jpg");
     }
 }
 
 void Game::setMusic(const std::string& filename) {
     if (!m_game_music.openFromFile(filename)) {
-        m_game_music.openFromFile("resources/music.mp3");
+        m_game_music.openFromFile("music/music.mp3");
     }
 }
 
@@ -41,21 +41,21 @@ void Game::draw(sf::RenderWindow& window) {
     m_game_state = GameState::ON;
 
     sf::Texture enemy_texture;
-    if (!enemy_texture.loadFromFile("resources/enemy.png")) {
+    if (!enemy_texture.loadFromFile("images/enemy.png")) {
         exit(1);
     }
     sf::Sprite enemy_sprite;
     enemy_sprite.setTexture(enemy_texture);
 
     sf::Texture health_point_texture;
-    if (!health_point_texture.loadFromFile("resources/heart.png")) {
+    if (!health_point_texture.loadFromFile("images/heart.png")) {
         exit(1);
     }
     sf::Sprite health_point_sprite;
     health_point_sprite.setTexture(health_point_texture);
 
     sf::Texture player_texture;
-    if (!player_texture.loadFromFile("resources/player1.png")) {
+    if (!player_texture.loadFromFile("images/player1.png")) {
         exit(1);
     }
     sf::Sprite player_sprite;

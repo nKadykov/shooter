@@ -4,7 +4,7 @@ Player::Player(float startX, float startY, sf::Sprite sprite) {
 	m_player_position.x = startX;
 	m_player_position.y = startY;
 
-	if (!m_player_texture.loadFromFile("resources/player1.png")) {
+	if (!m_player_texture.loadFromFile("images/player1.png")) {
 		exit(1);
 	}
 

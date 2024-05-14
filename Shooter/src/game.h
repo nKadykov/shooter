@@ -13,7 +13,9 @@ private:
 	sf::Sprite m_background_sprite;
 	sf::Music m_game_music;
 	GameState m_game_state;
-
+	int m_score;
+	sf::Font m_font;
+	sf::Text m_text_score;
 public:
 	Game();
 	Game(const Game&) = delete;
