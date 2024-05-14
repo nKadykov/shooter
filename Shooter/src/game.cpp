@@ -74,11 +74,11 @@ void Game::draw(sf::RenderWindow& window) {
 
     m_game_music.play();
     m_background_sprite.setTexture(m_background_texture);
-    Player player(10, 720 / 2, player_sprite);
-    HealthBar m_healthBar(20, 20, health_point_sprite);
-    m_healthBar.setHealth(player.getHealth());
-    std::list<Bullet> bullet_list;
-    std::list<Enemy> enemy_list;
+    std::unique_ptr<Player> p_player = std::make_unique<Player>(10, 720 / 2, player_sprite);
+    std::unique_ptr<HealthBar> p_health_bar = std::make_unique<HealthBar>(20, 20, health_point_sprite);
+    p_health_bar->setHealth(p_player->getHealth());
+    std::list<std::unique_ptr<Bullet>> bullet_list;
+    std::list<std::unique_ptr<Enemy>> enemy_list;
 
     bool is_firing = false;
 
@@ -105,17 +105,17 @@ void Game::draw(sf::RenderWindow& window) {
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-            player.moveDown();
+            p_player->moveDown();
         }
         else {
-            player.stopDown();
+            p_player->stopDown();
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-            player.moveUp();
+            p_player->moveUp();
         }
         else {
-            player.stopUp();
+            p_player->stopUp();
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
@@ -126,26 +126,26 @@ void Game::draw(sf::RenderWindow& window) {
         }
 
         if (is_firing == true) {
-            Bullet new_bullet(player.getPosition().left + 50, player.getPosition().top + 35);
-            bullet_list.push_back(new_bullet);
+            std::unique_ptr<Bullet> p_new_bullet = std::make_unique<Bullet>(p_player->getPosition().left + 50, p_player->getPosition().top + 35);
+            bullet_list.push_back(std::move(p_new_bullet));
             is_firing = false;
         }
 
-        int enemy_y = rand() % 600;
+        int enemy_y = rand() % 580;
 
         if (enemy_time > 1) {
-            Enemy new_enemy(1260, 50 + enemy_y, enemy_sprite);
-            enemy_list.push_back(new_enemy);
+            std::unique_ptr<Enemy> p_new_enemy = std::make_unique<Enemy>(1280, 50 + enemy_y, enemy_sprite);
+            enemy_list.push_back(std::move(p_new_enemy));
             enemy_time = 0;
         }
 
         for (auto it_bullet = bullet_list.begin(); it_bullet != bullet_list.end(); it_bullet++) {
             for (auto it_enemy = enemy_list.begin(); it_enemy != enemy_list.end(); it_enemy++) {
-                if (it_bullet->getPosition().intersects(it_enemy->getPosition())) {
+                if ((*it_bullet)->getPosition().intersects((*it_enemy)->getPosition())) {
                     m_score++;
                     m_text_score.setString("Score: " + std::to_string(m_score));
-                    it_bullet->makeHit();
-                    it_enemy->getHit();
+                    (*it_bullet)->makeHit();
+                    (*it_enemy)->getHit();
                     continue;
                 }
             }
@@ -153,11 +153,11 @@ void Game::draw(sf::RenderWindow& window) {
 
         auto it_enemy = enemy_list.begin();
         while (it_enemy != enemy_list.end()) {
-            if (it_enemy->getX() < 0) {
-                player.decreaseHealth();
-                m_healthBar.decreaseHealth();
+            if ((*it_enemy)->getX() < 0) {
+                p_player->decreaseHealth();
+                p_health_bar->decreaseHealth();
             }
-            if (it_enemy->getX() < 0 || it_enemy->ifHitted()) {
+            if ((*it_enemy)->getX() < 0 || (*it_enemy)->ifHitted()) {
                 it_enemy = enemy_list.erase(it_enemy);
                 continue;
             }
@@ -166,7 +166,7 @@ void Game::draw(sf::RenderWindow& window) {
 
         auto it_bullet = bullet_list.begin();
         while (it_bullet != bullet_list.end()) {
-            if (it_bullet->getX() > 1280 || it_bullet->ifMadeHit()) {
+            if ((*it_bullet)->getX() > 1280 || (*it_bullet)->ifMadeHit()) {
                 it_bullet = bullet_list.erase(it_bullet);
                 continue;
             }
@@ -174,22 +174,22 @@ void Game::draw(sf::RenderWindow& window) {
         }
 
         for (auto it = enemy_list.begin(); it != enemy_list.end(); it++) {
-            it->draw(window);
-            it->update(m_dt);
+            (*it)->draw(window);
+            (*it)->update(m_dt);
         }
 
         for (auto it = bullet_list.begin(); it != bullet_list.end(); it++) {
-            it->drawBullet(window);
-            it->update(m_dt);
+            (*it)->drawBullet(window);
+            (*it)->update(m_dt);
         }
 
-        if (!player.ifAlive()) {
+        if (!p_player->ifAlive()) {
             m_game_state = GameState::LOSE;
         }
 
-        player.update(m_dt);
-        m_healthBar.draw(window);
-        player.draw(window);
+        p_player->update(m_dt);
+        p_health_bar->draw(window);
+        p_player->draw(window);
         window.draw(m_text_score);
         window.display();
     }

@@ -35,7 +35,7 @@ void Bullet::drawBullet(sf::RenderWindow& window) const {
 	window.draw(m_bullet_shape);
 }
 
-void Bullet::update(sf::Time dt) {
+void Bullet::update(const sf::Time& dt) {
 	m_bullet_position.x += m_bullet_speed * dt.asSeconds();
 	m_bullet_shape.setPosition(m_bullet_position);
 }
