@@ -23,5 +23,5 @@ public:
 	bool ifHitted() const;
 
 	void draw(sf::RenderWindow&) const;
-	void update(sf::Time);
+	void update(const sf::Time&);
 };

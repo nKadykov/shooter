@@ -53,7 +53,7 @@ void Player::draw(sf::RenderWindow& window) const {
 	window.draw(m_player_sprite);
 }
 
-void Player::update(sf::Time dt) {
+void Player::update(const sf::Time& dt) {
 	if (m_player_moving_down) {
 		m_player_position.y += m_player_speed * dt.asSeconds();
 	}

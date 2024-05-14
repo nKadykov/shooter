@@ -29,7 +29,7 @@ void Enemy::draw(sf::RenderWindow& window) const {
 	window.draw(m_enemy_sprite);
 }
 
-void Enemy::update(sf::Time dt) {
+void Enemy::update(const sf::Time& dt) {
 	m_enemy_position.x -= m_enemy_speed * dt.asSeconds();
 	m_enemy_sprite.setPosition(m_enemy_position);
 }

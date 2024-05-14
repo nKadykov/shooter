@@ -20,7 +20,7 @@ Menu::~Menu() {
 	}
 }
 
-void Menu::addButton(int start_x, int start_y, sf::Texture texture) {
+void Menu::addButton(int start_x, int start_y, const sf::Texture& texture) {
 	Button* newButton = new Button(start_x, start_y, texture);
 	m_button_vector.push_back(newButton);
 }

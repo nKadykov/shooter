@@ -30,5 +30,5 @@ public:
 	void decreaseHealth();
 	bool ifAlive() const;
 	void draw(sf::RenderWindow&) const;
-	void update(sf::Time dt);
+	void update(const sf::Time& dt);
 };

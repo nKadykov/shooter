@@ -27,6 +27,6 @@ public:
 	MenuState getState() const;
 	void setButtonState(ButtonState);
 	void setState(MenuState);
-	void addButton(int, int, sf::Texture);
+	void addButton(int, int, const sf::Texture&);
 	void draw(sf::RenderWindow&);
 };
