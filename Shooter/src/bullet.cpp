@@ -31,8 +31,8 @@ bool Bullet::ifMadeHit() const {
 	return (m_made_hit == true) ? true : false;
 }
 
-void Bullet::drawBullet(sf::RenderWindow& window) const {
-	window.draw(m_bullet_shape);
+void Bullet::drawBullet(std::unique_ptr<sf::RenderWindow>& window) const {
+	window->draw(m_bullet_shape);
 }
 
 void Bullet::update(const sf::Time& dt) {

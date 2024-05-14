@@ -23,9 +23,9 @@ void GameOverWindow::setState(GameOverState state) {
 	m_state = state;
 }
 
-void GameOverWindow::draw(sf::RenderWindow& window) {
+void GameOverWindow::draw(std::unique_ptr<sf::RenderWindow>& window) {
 	m_state = GameOverState::ON;
-	window.clear();
+	window->clear();
 
 	Button button(230, 300, m_button_texture);
 	if (button.isPushed(window)) {
@@ -36,7 +36,7 @@ void GameOverWindow::draw(sf::RenderWindow& window) {
 		m_state = GameOverState::MENU;
 	}
 
-	window.draw(m_background_sprite);
-	window.draw(m_sprite);
+	window->draw(m_background_sprite);
+	window->draw(m_sprite);
 	button.draw(window);
 }

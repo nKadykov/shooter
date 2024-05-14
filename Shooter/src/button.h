@@ -33,7 +33,7 @@ public:
 	sf::Texture getTexture();
 	sf::Sprite getSprite();
 
-	bool isPushed(const sf::RenderWindow&) const;
+	bool isPushed(const std::unique_ptr<sf::RenderWindow>&) const;
 
-	void draw(sf::RenderWindow&) const;
+	void draw(std::unique_ptr<sf::RenderWindow>&) const;
 };

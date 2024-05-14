@@ -30,6 +30,6 @@ public:
 	GameState getState() const;
 	void setState(GameState);
 
-	void draw(sf::RenderWindow&);
+	void Start(std::unique_ptr<sf::RenderWindow>&);
 };
 

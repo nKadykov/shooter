@@ -25,8 +25,8 @@ bool Enemy::ifHitted() const {
 	return m_enemy_hit;
 }
 
-void Enemy::draw(sf::RenderWindow& window) const {
-	window.draw(m_enemy_sprite);
+void Enemy::draw(std::unique_ptr<sf::RenderWindow>& window) const {
+	window->draw(m_enemy_sprite);
 }
 
 void Enemy::update(const sf::Time& dt) {

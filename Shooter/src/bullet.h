@@ -24,6 +24,6 @@ public:
 	void makeHit();
 	bool ifMadeHit() const;
 
-	void drawBullet(sf::RenderWindow&) const;
+	void drawBullet(std::unique_ptr<sf::RenderWindow>&) const;
 	void update(const sf::Time&);
 };

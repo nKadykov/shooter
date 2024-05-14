@@ -8,9 +8,9 @@ enum class State { GAME, MENU, GAME_OVER };
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), L"Shooter", sf::Style::Default);
-    window.setFramerateLimit(60);
-    window.setVerticalSyncEnabled(true);
+    std::unique_ptr<sf::RenderWindow> window = std::make_unique<sf::RenderWindow>(sf::VideoMode(1280, 720), L"Shooter", sf::Style::Default);
+    window->setFramerateLimit(60);
+    window->setVerticalSyncEnabled(true);
 
     GameOverWindow game_over_window;
     game_over_window.setPosition(300, 200);
@@ -19,7 +19,7 @@ int main()
     p_game->setMusic("music/back1.mp3");
     p_game->setBackground("images/back1.jpg");
 
-    Menu menu;
+    std::unique_ptr<Menu> menu = std::make_unique<Menu>();
     sf::Texture button_texture_1;
     sf::Texture button_texture_2;
     if (!button_texture_1.loadFromFile("images/button2.png")) {
@@ -28,18 +28,18 @@ int main()
     if (!button_texture_2.loadFromFile("images/button3.png")) {
         exit(1);
     }
-    menu.addButton(500, 200, button_texture_1);
-    menu.addButton(500, 400, button_texture_2);
+    menu->addButton(500, 200, button_texture_1);
+    menu->addButton(500, 400, button_texture_2);
 
     State state = State::MENU;
     ButtonState button_state = ButtonState::NONE;
     GameState game_state = GameState::ON;
     GameOverState game_over_state = GameOverState::OFF;
 
-    while (window.isOpen()) {
-        window.clear();
+    while (window->isOpen()) {
+        window->clear();
 
-        button_state = menu.getButtonState();
+        button_state = menu->getButtonState();
         
         if (p_game) {
             game_state = p_game->getState();
@@ -47,13 +47,13 @@ int main()
         game_over_state = game_over_window.getState();
         sf::Event event;
 
-        while (window.pollEvent(event)) {
+        while (window->pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
-                window.close();
+                window->close();
             }
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-            window.close();
+            window->close();
         }
 
         if (game_state == GameState::OFF || game_over_state == GameOverState::MENU) {
@@ -78,24 +78,24 @@ int main()
             p_game->setBackground("images/back1.jpg");
             state = State::GAME;
             game_over_window.setState(GameOverState::ON);
-            menu.setButtonState(ButtonState::NONE);
+            menu->setButtonState(ButtonState::NONE);
         }
         if (button_state == ButtonState::CLOSE) {
-            window.close();
+            window->close();
         }
 
         switch (state) {
         case State::MENU:
-            menu.draw(window);
+            menu->draw(window);
             break;
         case State::GAME:
-            p_game->draw(window);
+            p_game->Start(window);
             break;
         case State::GAME_OVER:
             game_over_window.draw(window);
             break;
         }
-        window.display();
+        window->display();
     }
     if (p_game) {
         delete p_game;

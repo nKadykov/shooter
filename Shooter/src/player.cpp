@@ -49,8 +49,8 @@ bool Player::ifAlive() const {
 	}
 }
 
-void Player::draw(sf::RenderWindow& window) const {
-	window.draw(m_player_sprite);
+void Player::draw(std::unique_ptr<sf::RenderWindow>& window) const {
+	window->draw(m_player_sprite);
 }
 
 void Player::update(const sf::Time& dt) {

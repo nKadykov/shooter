@@ -30,8 +30,8 @@ void HealthBar::setHealth(int playerHealth) {
 	}
 }
 
-void HealthBar::draw(sf::RenderWindow& window) {
+void HealthBar::draw(std::unique_ptr<sf::RenderWindow>& window) {
 	for (int i = 0; i < m_health; i++) {
-		window.draw(m_health_bar_vector[i].getHealthPointSprite());
+		window->draw(m_health_bar_vector[i].getHealthPointSprite());
 	}
 }

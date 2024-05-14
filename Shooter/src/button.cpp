@@ -42,8 +42,8 @@ sf::Texture Button::getTexture() {
 	return m_texture;
 }
 
-bool Button::isPushed(const sf::RenderWindow& window) const {
-	sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
+bool Button::isPushed(const std::unique_ptr<sf::RenderWindow>& window) const {
+	sf::Vector2i mouse_position = sf::Mouse::getPosition(*window);
 	if (!(mouse_position.x > m_coordinates.x_left && mouse_position.x < m_coordinates.x_right &&
 		mouse_position.y > m_coordinates.y_up && mouse_position.y < m_coordinates.y_down)) {
 		return false;
@@ -54,6 +54,6 @@ bool Button::isPushed(const sf::RenderWindow& window) const {
 	return true;
 }
 
-void Button::draw(sf::RenderWindow& window) const {
-	window.draw(m_sprite);
+void Button::draw(std::unique_ptr<sf::RenderWindow>& window) const {
+	window->draw(m_sprite);
 }

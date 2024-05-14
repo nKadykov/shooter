@@ -25,5 +25,5 @@ public:
 	GameOverState getState();
 	void setState(GameOverState);
 	void setPosition(float, float);
-	void draw(sf::RenderWindow&);
+	void draw(std::unique_ptr<sf::RenderWindow>&);
 };

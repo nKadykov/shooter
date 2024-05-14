@@ -47,7 +47,7 @@ void Game::setState(GameState state) {
     m_game_state = state;
 }
 
-void Game::draw(sf::RenderWindow& window) {
+void Game::Start(std::unique_ptr<sf::RenderWindow>& window) {
 
     m_game_state = GameState::ON;
 
@@ -87,9 +87,9 @@ void Game::draw(sf::RenderWindow& window) {
 
     srand(time(nullptr));
 
-    while (window.isOpen() && m_game_state == GameState::ON)
+    while (window->isOpen() && m_game_state == GameState::ON)
     {
-        window.draw(m_background_sprite);
+        window->draw(m_background_sprite);
         m_dt = m_clock.getElapsedTime();
         m_clock.restart();
         float t = m_dt.asSeconds();
@@ -101,7 +101,7 @@ void Game::draw(sf::RenderWindow& window) {
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-            window.close();
+            window->close();
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
@@ -190,8 +190,8 @@ void Game::draw(sf::RenderWindow& window) {
         p_player->update(m_dt);
         p_health_bar->draw(window);
         p_player->draw(window);
-        window.draw(m_text_score);
-        window.display();
+        window->draw(m_text_score);
+        window->display();
     }
     bullet_list.clear();
     enemy_list.clear();

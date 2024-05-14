@@ -23,5 +23,5 @@ public:
 
 	void setHealth(int);
 	void decreaseHealth();
-	void draw(sf::RenderWindow&);
+	void draw(std::unique_ptr<sf::RenderWindow>&);
 };
