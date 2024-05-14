@@ -1,6 +1,6 @@
 #include "player.h"
 
-Player::Player(float startX, float startY, sf::Sprite sprite) {
+Player::Player(float startX, float startY, const sf::Sprite& sprite) {
 	m_player_position.x = startX;
 	m_player_position.y = startY;
 
@@ -60,8 +60,8 @@ void Player::update(sf::Time dt) {
 	if (m_player_moving_up) {
 		m_player_position.y -= m_player_speed * dt.asSeconds();
 	}
-	if (m_player_position.y > 650) {
-		m_player_position.y = 650;
+	if (m_player_position.y > 630) {
+		m_player_position.y = 630;
 	}
 	if (m_player_position.y < 60) {
 		m_player_position.y = 60;

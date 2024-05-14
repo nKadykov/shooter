@@ -14,6 +14,17 @@ Game::Game() {
     if (!m_background_texture.loadFromFile("images/background.jpg")) {
         exit(1);
     }
+
+    m_score = 0;
+    if (!m_font.loadFromFile("fonts/ImpactRegular.ttf")) {
+        exit(1);
+    }
+    m_text_score.setFont(m_font);
+    m_text_score.setPosition(900, 10);
+    m_text_score.setOutlineColor(sf::Color::Black);
+    m_text_score.setOutlineThickness(4);
+    m_text_score.setCharacterSize(40);
+    m_text_score.setString("Score: " + std::to_string(m_score));
 }
 
 void Game::setBackground(const std::string& filename) {
@@ -123,7 +134,7 @@ void Game::draw(sf::RenderWindow& window) {
         int enemy_y = rand() % 600;
 
         if (enemy_time > 1) {
-            Enemy new_enemy(1280 - 15, 50 + enemy_y, enemy_sprite);
+            Enemy new_enemy(1260, 50 + enemy_y, enemy_sprite);
             enemy_list.push_back(new_enemy);
             enemy_time = 0;
         }
@@ -131,6 +142,8 @@ void Game::draw(sf::RenderWindow& window) {
         for (auto it_bullet = bullet_list.begin(); it_bullet != bullet_list.end(); it_bullet++) {
             for (auto it_enemy = enemy_list.begin(); it_enemy != enemy_list.end(); it_enemy++) {
                 if (it_bullet->getPosition().intersects(it_enemy->getPosition())) {
+                    m_score++;
+                    m_text_score.setString("Score: " + std::to_string(m_score));
                     it_bullet->makeHit();
                     it_enemy->getHit();
                     continue;
@@ -177,6 +190,7 @@ void Game::draw(sf::RenderWindow& window) {
         player.update(m_dt);
         m_healthBar.draw(window);
         player.draw(window);
+        window.draw(m_text_score);
         window.display();
     }
     bullet_list.clear();

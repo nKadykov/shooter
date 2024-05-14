@@ -15,7 +15,7 @@ private:
 
 public:
 	Player() = delete;
-	Player(float startX, float startY, sf::Sprite);
+	Player(float startX, float startY, const sf::Sprite&);
 	Player(const Player&) = delete;
 	Player(Player&&) = delete;
 	Player& operator=(const Player&) = delete;

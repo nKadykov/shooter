@@ -1,6 +1,6 @@
 #include "enemy.h"
 
-Enemy::Enemy(int startX, int startY, sf::Sprite sprite) {
+Enemy::Enemy(int startX, int startY, const sf::Sprite& sprite) {
 	m_enemy_speed = 500.0f;
 	m_enemy_position.x = startX;
 	m_enemy_position.y = startY;

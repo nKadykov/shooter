@@ -10,7 +10,7 @@ private:
 	bool m_enemy_hit = false;
 public:
 	Enemy() = delete;
-	Enemy(int startX, int startY, sf::Sprite);
+	Enemy(int startX, int startY, const sf::Sprite&);
 	Enemy(const Enemy&) = default;
 	Enemy(Enemy&&) = default;
 	Enemy& operator=(const Enemy&) = delete;
