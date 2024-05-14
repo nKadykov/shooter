@@ -12,14 +12,14 @@ int main()
     window->setFramerateLimit(60);
     window->setVerticalSyncEnabled(true);
 
-    GameOverWindow game_over_window;
-    game_over_window.setPosition(300, 200);
+    std::unique_ptr<GameOverWindow> game_over_window = std::make_unique<GameOverWindow>();
+    game_over_window->setPosition(300, 200);
 
-    Game *p_game = new Game();
+    Game* p_game = new Game();
     p_game->setMusic("music/back1.mp3");
     p_game->setBackground("images/back1.jpg");
 
-    std::unique_ptr<Menu> menu = std::make_unique<Menu>();
+    std::unique_ptr<Menu> p_menu = std::make_unique<Menu>();
     sf::Texture button_texture_1;
     sf::Texture button_texture_2;
     if (!button_texture_1.loadFromFile("images/button2.png")) {
@@ -28,8 +28,8 @@ int main()
     if (!button_texture_2.loadFromFile("images/button3.png")) {
         exit(1);
     }
-    menu->addButton(500, 200, button_texture_1);
-    menu->addButton(500, 400, button_texture_2);
+    p_menu->addButton(500, 200, button_texture_1);
+    p_menu->addButton(500, 400, button_texture_2);
 
     State state = State::MENU;
     ButtonState button_state = ButtonState::NONE;
@@ -39,12 +39,12 @@ int main()
     while (window->isOpen()) {
         window->clear();
 
-        button_state = menu->getButtonState();
+        button_state = p_menu->getButtonState();
         
         if (p_game) {
             game_state = p_game->getState();
         }
-        game_over_state = game_over_window.getState();
+        game_over_state = game_over_window->getState();
         sf::Event event;
 
         while (window->pollEvent(event)) {
@@ -62,7 +62,7 @@ int main()
                 p_game = nullptr;
             }
             state = State::MENU;
-            game_over_window.setState(GameOverState::ON);
+            game_over_window->setState(GameOverState::ON);
         }
         if (game_state == GameState::LOSE) {
             if (p_game) {
@@ -74,25 +74,29 @@ int main()
         }
         if (game_over_state == GameOverState::OFF || button_state == ButtonState::START_GAME) {
             p_game = new Game();
-            p_game->setMusic("images/back1.mp3");
+            p_game->setMusic("music/back1.mp3");
             p_game->setBackground("images/back1.jpg");
             state = State::GAME;
-            game_over_window.setState(GameOverState::ON);
-            menu->setButtonState(ButtonState::NONE);
+            game_over_window->setState(GameOverState::ON);
+            p_menu->setButtonState(ButtonState::NONE);
         }
         if (button_state == ButtonState::CLOSE) {
+            if (p_game) {
+                delete p_game;
+                p_game = nullptr;
+            }
             window->close();
         }
 
         switch (state) {
         case State::MENU:
-            menu->draw(window);
+            p_menu->draw(window);
             break;
         case State::GAME:
             p_game->Start(window);
             break;
         case State::GAME_OVER:
-            game_over_window.draw(window);
+            game_over_window->draw(window);
             break;
         }
         window->display();

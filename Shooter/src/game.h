@@ -23,7 +23,7 @@ public:
 	Game(Game&&) = delete;
 	Game& operator=(const Game&) = delete;
 	Game& operator=(Game&&) = delete;
-	~Game() = default;
+	//~Game() = default;
 
 	void setMusic(const std::string&);
 	void setBackground(const std::string&);

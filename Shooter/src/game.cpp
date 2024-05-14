@@ -35,7 +35,7 @@ void Game::setBackground(const std::string& filename) {
 
 void Game::setMusic(const std::string& filename) {
     if (!m_game_music.openFromFile(filename)) {
-        m_game_music.openFromFile("music/music.mp3");
+        m_game_music.openFromFile("music/back1.mp3");
     }
 }
 
