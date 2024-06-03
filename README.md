@@ -33,13 +33,29 @@ Game Over
 
 
 # Требования
-1. Скачать и установить Visual Studio <br/>
-https://visualstudio.microsoft.com/
-2. Скачать и установить SFML <br/>
-https://www.sfml-dev.org/download.php
+# Проект с использованием CMAKE и библиотеки SFML
+Проект с использованием CMake и vcpkg с библиотекой SFML.
 
-# Настройка Visual Studio
-https://www.sfml-dev.org/tutorials/2.6/start-vc.php
+# Требования
+1. Скачать и установить vcpkg:</br>
+git clone https://github.com/microsoft/vcpkg.git </br>
+cd vcpkg </br>
+bootstrap-vcpkg.bat </br>
+vcpkg integrate install
 
-# Клонирование репозитория
-git clone https://github.com/nKadykov/shooter.git
+2. Скачать и установить CMake
+
+3. Скачать SFML:</br>
+vcpkg install sfml:x64-windows
+
+4. Клонировать репозиторий:</br>
+git clone https://github.com/nKadykov/shooter_project.git
+
+5. Создать папку с проектом:</br>
+mkdir build</br>
+cd build
+
+6. Собрать проект:</br>
+cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake</br>
+Заменить C:/path/to/vcpkg на путь к vcpkg</br>
+cmake --build
